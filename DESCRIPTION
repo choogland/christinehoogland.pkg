@@ -1,0 +1,27 @@
+Package: christinehoogland
+Title: Certification Level 2 - Developer - Exam
+Version: 0.0.0.9000
+Authors@R: c(
+    person("Christine", "Hoogland", , "christine.hoogland@finddx.org", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-7341-1551")),
+    person("FindDx", role = "cph")
+  )
+Description: French Certification of Professional Qualification - Level 2
+    - Developer – Package creation.
+License: MIT + file LICENSE
+Depends: 
+    R (>= 2.10)
+Imports: 
+    assertthat,
+    dplyr,
+    magrittr
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat
+VignetteBuilder: 
+    knitr
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2

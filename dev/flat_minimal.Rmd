@@ -1,0 +1,73 @@
+---
+title: "flat_minimal.Rmd empty"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r development, include=FALSE}
+library(testthat)
+library(assertthat)
+library(dplyr)
+```
+
+<!--
+ You need to run the 'description' chunk in the '0-dev_history.Rmd' file before continuing your code there.
+-->
+
+# Function bmi
+
+This function returns the Body Mass Index of an individual (https://en.wikipedia.org/wiki/Body_mass_index).
+
+The function must take 2 parameters, the mass in kg and the height in meter. It returns the result of the operation mass/(height * height).
+
+```{r function-bmi}
+#' bmi Body Mass Index of an individual
+#'
+#' @param mass in kg
+#' @param height in m
+#' @return bmi as mass/(height * height)
+#' @importFrom assertthat assert_that
+#' @importFrom dplyr mutate
+#' @export
+#'
+#' @examples
+bmi <- function(mass, height) {
+  if(!(is.na(mass)|(is.numeric(mass)&mass>0))) {stop("mass should be numeric and >0")}
+  if(!(is.na(height)|(is.numeric(height)&height>0))) {stop("height should be numeric and >0")}
+  bmi <- NA
+  if (!is.na(mass)&!is.na(height)) {
+    bmi <- mass/(height * height)
+  }
+  return(bmi)
+}
+```
+
+```{r examples-bmi}
+bmi(mass = 80, height = 1.80)
+bmi(mass = NA, height = 1.80)
+bmi(mass = 80, height = NA)
+bmi(mass = NA, height = NA)
+```
+
+```{r tests-bmi}
+library(dplyr)
+test_that("bmi works", {
+  
+  test_that("1. not numeric", {
+    expect_error(bmi(mass = 'toto', height = 1.80))
+  })
+
+  test_that("2. NA ok", {
+    expect_equal(bmi(mass = NA, height = 1.80),NA)
+  })
+
+})
+```
+
+
+```{r development-inflate, eval=FALSE}
+# Run but keep eval=FALSE to avoid infinite loop
+# Execute in the console directly
+fusen::inflate(flat_file = "dev/flat_minimal.Rmd", vignette_name = "Minimal")
+```
